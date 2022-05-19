@@ -1,6 +1,6 @@
 from turtle import *
-
 from freegames import square, vector
+from time import sleep
 
 p1xy = vector(-200, 0)
 p1aim = vector(4, 0)
@@ -19,6 +19,20 @@ def inside(head):
     """Return True if head inside screen."""
     return -300 < head.x < 300 and -300 < head.y < 300
 
+#Timer para começar o jogo:
+#Conta um tempo para iniciar o jogo.
+print('T R O N')
+
+sleep(2)
+print('STARTING GAME...')
+sleep(2)
+print("3")
+sleep(1)  
+print("2")
+sleep(1)
+print("1")
+sleep(2)
+print("GO!")
 
 def draw():
     """Advance players and draw game."""
@@ -91,9 +105,11 @@ onkey(lambda: p3aim.rotate(-90), '5')
 draw()
 done()
 
-#teste
-#criação do Player 3
-#Colocou colisão entre todos os players
-#Colisão no próprio player
-#Ajuste de velocidade
+#Criação do Player 3 - dar a opção de escolher a cor do personagem ou quantos jogadores deseja jogar.
+
+#Colocou colisão entre todos os players e no próprio player - falha encontrada.
+
+#Ajuste de velocidade - ajustar para o usuario escolher ou trocar por mudar a cor do player.
+
+#Adicionado um Temporizador para começar o jogo.
 
