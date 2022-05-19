@@ -23,6 +23,8 @@ def inside(head):
 #Conta um tempo para iniciar o jogo.
 print('T R O N')
 
+
+
 sleep(2)
 print('STARTING GAME...')
 sleep(2)
@@ -33,6 +35,22 @@ sleep(1)
 print("1")
 sleep(2)
 print("GO!")
+
+def playerColor():
+    colors = ['red', 'green', 'blue', 'black']
+    count = 0
+    lenght = len(colors) - 1
+    colorPlayer1 = input(f"Escolha a cor do Player 1: {colors}")
+    
+    while(count <= lenght):
+        if(colors[count] == colorPlayer1):
+            square(p1xy.x, p1xy.y, 3, colors[count])
+            break
+        count += 1
+
+    
+
+        
 
 def draw():
     """Advance players and draw game."""
@@ -69,6 +87,9 @@ def draw():
         print('Player red and blue wins!')
         return
 
+    
+#Colisão do próprio player----------------------
+
     if not inside(p1head) or p1head in p1body:
         print('Player blue and green wins!')
         return
@@ -85,7 +106,7 @@ def draw():
     p2body.add(p2head)
     p3body.add(p3head)
 
-    square(p1xy.x, p1xy.y, 3, 'red')
+    playerColor()
     square(p2xy.x, p2xy.y, 3, 'blue')
     square(p3xy.x, p3xy.y, 3, 'green')
     update()
