@@ -91,6 +91,7 @@ onkey(lambda: p3aim.rotate(-90), '5')
 draw()
 done()
 
+#teste
 #criação do Player 3
 #Colocou colisão entre todos os players
 #Colisão no próprio player
