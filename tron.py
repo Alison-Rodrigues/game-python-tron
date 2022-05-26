@@ -1,3 +1,4 @@
+from os import remove
 from turtle import *
 from freegames import square, vector
 from time import sleep
@@ -15,43 +16,44 @@ p3aim = vector(0, -4)
 p3body = set()
 
 
+
+
+#------------Define a area do jogo(Quadrado que abre o jogo)------------#
 def inside(head):
     """Return True if head inside screen."""
     return -300 < head.x < 300 and -300 < head.y < 300
 
-#Timer para começar o jogo:
-#Conta um tempo para iniciar o jogo.
-print('T R O N')
+
+#------------Menssagem de saudação------------#
+print()
+print('=================================================')
+print('         Bem-vindo a Grade de Tron!         ')
+print('=================================================')
+print()
+
+#------------Script para fazer o usuario escolhe a cor do personagem------------#
+colors = ['red', 'green', 'blue', 'black', 'orange', 'pink', 'gray', 'purple']
+colorPlayer1 = input(f"Escolha a cor do Player 1: {colors} ")
+colors.remove(colorPlayer1)
+colorPlayer2 = input(f"Escolha a cor do Player 2: {colors} ")
+colors.remove(colorPlayer2)
+colorPlayer3 = input(f"Escolha a cor do Player 3: {colors} ")
+colors.remove(colorPlayer3)
 
 
-
-sleep(2)
+#------------Temporizador para inicio do jogo------------#
+sleep(1)
 print('STARTING GAME...')
-sleep(2)
+sleep(1)
 print("3")
 sleep(1)  
 print("2")
 sleep(1)
 print("1")
-sleep(2)
+sleep(1)
 print("GO!")
 
-def playerColor():
-    colors = ['red', 'green', 'blue', 'black']
-    count = 0
-    lenght = len(colors) - 1
-    colorPlayer1 = input(f"Escolha a cor do Player 1: {colors}")
-    
-    while(count <= lenght):
-        if(colors[count] == colorPlayer1):
-            square(p1xy.x, p1xy.y, 3, colors[count])
-            break
-        count += 1
-
-    
-
-        
-
+#-----------Define os movimentos dos players-------------#
 def draw():
     """Advance players and draw game."""
     p1xy.move(p1aim)
@@ -63,56 +65,62 @@ def draw():
     p3xy.move(p3aim)
     p3head = p3xy.copy()
 
+
+    
+
+#------------Colisão dos players entre eles------------#
     if not inside(p1head) or p1head in p2body:
-        print('Player blue and green wins!')
+        print(f"Player {colorPlayer2} and {colorPlayer3} wins!")
         return
 
     if not inside(p1head) or p1head in p3body:
-        print('Player blue and green wins!')
+        print(f"Player {colorPlayer2} and {colorPlayer3} wins!")
         return
 
     if not inside(p2head) or p2head in p1body:
-        print('Player red and green wins!')
+        print(f"Player {colorPlayer1} and {colorPlayer3} wins!")
         return
 
     if not inside(p2head) or p2head in p3body:
-        print('Player red and green wins!')
+        print(f"Player {colorPlayer1} and {colorPlayer3} wins!")
         return
 
     if not inside(p3head) or p3head in p1body:
-        print('Player red and blue wins!')
+        print(f"Player {colorPlayer1} and {colorPlayer2} wins!")
         return
 
     if not inside(p3head) or p3head in p2body:
-        print('Player red and blue wins!')
+        print(f"Player {colorPlayer1} and {colorPlayer2} wins!")
         return
 
     
-#Colisão do próprio player----------------------
-
+#------------Colisão do player em si mesmo------------#
     if not inside(p1head) or p1head in p1body:
-        print('Player blue and green wins!')
+        print(f"Player {colorPlayer2} and {colorPlayer3} wins!")
         return
 
     if not inside(p2head) or p2head in p2body:
-        print('Player red and green wins!')
+        print(f"Player {colorPlayer1} and {colorPlayer3} wins!")
         return
 
     if not inside(p3head) or p3head in p3body:
-        print('Player red and blue wins!')
+        print(f"Player {colorPlayer1} and {colorPlayer2} wins!")
         return
 
+#-----------Adiciona o 'corpo' a 'cabeça'-------------#
     p1body.add(p1head)
     p2body.add(p2head)
     p3body.add(p3head)
 
-    playerColor()
-    square(p2xy.x, p2xy.y, 3, 'blue')
-    square(p3xy.x, p3xy.y, 3, 'green')
+
+#------------Adiciona a direção para que os quadrados devem seguir------------#
+    square(p1xy.x, p1xy.y, 3, colorPlayer1)
+    square(p2xy.x, p2xy.y, 3, colorPlayer2)
+    square(p3xy.x, p3xy.y, 3, colorPlayer3)
     update()
     ontimer(draw, 20)
 
-
+#------------Adiciona as teclas de comando------------#
 setup(600, 600, 370, 0)
 hideturtle()
 tracer(False)
@@ -126,11 +134,10 @@ onkey(lambda: p3aim.rotate(-90), '5')
 draw()
 done()
 
-#Criação do Player 3 - dar a opção de escolher a cor do personagem ou quantos jogadores deseja jogar.
-
-#Colocou colisão entre todos os players e no próprio player - falha encontrada.
-
-#Ajuste de velocidade - ajustar para o usuario escolher ou trocar por mudar a cor do player.
-
+#------------Alterações Realizadas------------#
+#Criação do Player 3
+#Escolha de cor do player
+#Colisão entre os players e entre eles mesmos
 #Adicionado um Temporizador para começar o jogo.
-
+#Boost de velocidade - Não feito
+#Imagem de fundo - Não feito
